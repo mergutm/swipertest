@@ -1,6 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MovieProvider extends ChangeNotifier {
+  final String dominio = 'api.themovie.org';
+  final String _apiKey = '3e531a72884b7a2a73f4f5b8df0506e5';
+  final String language = 'es-MX';
+  final String segmento = '3/movie/now_playing';
+
+  Future getMoviesNowPlaying() async {
+    final url = Uri.https(dominio, segmento, {
+      'api_key': _apiKey,
+      'language': language,
+    });
+
+    final response = await http.get(url);
+    return response.body;
+  }
+
   MovieProvider() {
     notificarCambios();
   }
@@ -9,12 +25,18 @@ class MovieProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  List<int> numeros = [];
+  void increase() {
+    int total = pokes.length + 1;
+    pokes.add(
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/$total.png",
+    );
+  }
+
   List<String> pokes = [
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/2.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/3.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/4.png',
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/5.png',
   ];
 }
+
+
+// https://image.tmdb.org/t/p/w500

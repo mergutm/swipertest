@@ -3,7 +3,6 @@ import 'package:myapp/home_app.dart';
 import 'package:provider/provider.dart';
 import 'provider/movie_provider.dart';
 
-
 void main() => runApp(const MyProvider()); // Added const here
 
 class MyProvider extends StatelessWidget {
@@ -11,8 +10,9 @@ class MyProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-        ChangeNotifierProvider(create: (_) => MovieProvider()),      
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => MovieProvider(), lazy: false),
       ],
       child: const MyApp(),
     );
