@@ -1,7 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/home_app.dart';
+import 'package:provider/provider.dart';
+import 'provider/movie_provider.dart';
+
 
 void main() => runApp(const MyApp()); // Added const here
+
+class MyProvider extends StatelessWidget {
+  const MyProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => MovieProvider()),      
+      ]
+    );
+  }
+}
 
 class MyApp extends StatelessWidget {
   // Add the key parameter to the constructor
