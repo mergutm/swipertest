@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'provider/movie_provider.dart';
 
 
-void main() => runApp(const MyApp()); // Added const here
+void main() => runApp(const MyProvider()); // Added const here
 
 class MyProvider extends StatelessWidget {
   const MyProvider({super.key});
@@ -13,7 +13,8 @@ class MyProvider extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
         ChangeNotifierProvider(create: (_) => MovieProvider()),      
-      ]
+      ],
+      child: const MyApp(),
     );
   }
 }
