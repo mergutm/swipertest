@@ -10,7 +10,7 @@ MovieResponse movieResponseFromJson(String str) =>
 //String movieResponseToJson(MovieResponse data) => json.encode(data.toJson());
 
 class MovieResponse {
-  final String dates;
+  final String? dates;
   final int page;
   final List<Movie> results;
   final int totalPages;
