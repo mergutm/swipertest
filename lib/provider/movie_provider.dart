@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+
+import 'package:myapp/models/movie_response.dart';
 
 class MovieProvider extends ChangeNotifier {
   final String dominio = 'api.themovie.org';
@@ -15,6 +18,15 @@ class MovieProvider extends ChangeNotifier {
 
     final response = await http.get(url);
     return response.body;
+  }
+
+  void getOneMovie() async {
+    final respuesta = await getMoviesNowPlaying();
+
+    var jsonResponse = convert.jsonDecode(respuesta) as Map<String, dynamic>;
+    final movieResponse = MovieResponse.fromJson(jsonResponse);
+
+    notifyListeners();
   }
 
   MovieProvider() {
@@ -36,6 +48,8 @@ class MovieProvider extends ChangeNotifier {
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/1.png',
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/2.png',
   ];
+
+  List<any> now_playing = [];
 }
 
 
